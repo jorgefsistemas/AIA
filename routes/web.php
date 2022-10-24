@@ -6,6 +6,7 @@ use App\Http\Livewire\TaxiOperadores;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Livewire\Cancelacion\Placa;
+use App\Http\Livewire\Registro\AltaRegistros;
 use App\Http\Livewire\Cancelacion\BusquedaSabana;
 use App\Http\Livewire\Registros\ImprimirRegistros;
 use App\Http\Controllers\Tramite\TramiteController;
@@ -60,6 +61,6 @@ Route::prefix('cancelacion')->middleware(['role:sistemas'])->group(function () {
 // cambios de registro
 
 Route::prefix('registros')->middleware(['role:sistemas'])->group(function () {
-    Route::get('/alta_registros', CancelacionMovimientos::class)->name('alta_registros');
+    Route::get('/alta_registros', AltaRegistros::class)->name('alta_registros');
 });
 

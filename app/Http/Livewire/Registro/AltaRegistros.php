@@ -1,15 +1,16 @@
 <?php
 
-namespace App\Http\Livewire\Cancelacion;
+namespace App\Http\Livewire\Registro;
 use App\Models\Tramite;
 use App\Services\Valid;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\DB;
 use App\Services\Consume\SicoveApi;
+use Illuminate\Support\Facades\Http;
 
 
-class CancelacionMovimientos extends Component
+class AltaRegistros extends Component
 {
     use WithFileUploads;
     public $placa;
@@ -17,19 +18,38 @@ class CancelacionMovimientos extends Component
     public $oficio_confirmation;
     public $alert;
     protected $listeners = ['snapPhoto', 'snapPhotoTaken','snapPhotoOperador'];
+    public $marca= [];
+
+
+    public function mount()
+    {
+        $token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNjY2NTcyODg5LCJleHAiOjE2NjY1NzY0ODksIm5iZiI6MTY2NjU3Mjg4OSwianRpIjoiOXIzczViZ0hyOUJHWk9aeSIsInN1YiI6MSwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.9toV9Vf2W88FoGora9RaaX0k6jqknvu2T3NCym9dv70";
+
+
+        // $response = Http::get('http://localhost:8000/api/marca');
+        $marca = Http::withToken($token)->get('http://localhost:8000/api/marca');
+        $this->marca=$marca->json($key = null);
+        //$this->marca=$marca->object();
+       // dd($this->marca);
+        //  dd($this->marca->json($key = null));
+
+    }
+
+
     // rules
     public function rules()
     {
         return [
-            'placa' => 'required|unique:cancelacions,placa',
+            // 'marca' => 'required|unique:cancelacions,placa',
+            'marca' => 'required',
             // 'oficio' => 'required|confirmed|unique:cancelacions,oficio',
         ];
     }
     public function messages()
     {
         return [
-            'placa.required' => 'Favor de verificar la placa.',
-            'placa.unique' => 'Favor de verificar la placa,  ya tiene cancelaciones.',
+            'marca.required' => 'Favor de verificar la placa.',
+            // 'marca.unique' => 'Favor de verificar la placa,  ya tiene cancelaciones.',
             // 'oficio.required' => 'Favor de verificar el oficio.',
             // 'oficio.confirmed' => 'Favor de confirmar el oficio.',
             // 'oficio.unique' => 'El oficio ya fue capturado en cancelaciones',
@@ -38,7 +58,9 @@ class CancelacionMovimientos extends Component
     // menssages
     public function render()
     {
-        return view('livewire.registro.alta-registros')->extends('layouts.panel')->section('panel_content');
+        return view('livewire.registro.alta-registros', [
+            'marca' =>  $this->marca
+            ])->extends('layouts.panel')->section('panel_content');
     }
     public function submit()
     {

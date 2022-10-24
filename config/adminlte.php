@@ -219,7 +219,7 @@ return [
             'can' => 'sistemas',
             'icon' => 'fas fa-registered',
             'icon_color' => 'blue',
-            'route' => 'cancelacion_movimientos'
+            'route' => 'alta_registros'
         ],
         [
             'text' => 'Búsqueda de cancelados',

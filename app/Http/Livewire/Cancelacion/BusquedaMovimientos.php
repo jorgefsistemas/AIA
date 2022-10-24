@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Cancelacion;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Services\Consume\SicoveApi;
+use Illuminate\Support\Facades\Http;
 
 
 class BusquedaMovimientos extends Component
@@ -38,6 +39,7 @@ class BusquedaMovimientos extends Component
     // menssages
     public function render()
     {
+
         return view('livewire.cancelacion.busqueda-movimientos', [
             'cancelaciones' =>  $this->cancelaciones
             ])
