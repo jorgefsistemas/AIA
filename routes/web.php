@@ -55,3 +55,11 @@ Route::prefix('cancelacion')->middleware(['role:sistemas'])->group(function () {
 Route::prefix('cancelacion')->middleware(['role:sistemas'])->group(function () {
     Route::get('/busqueda_movimientos', BusquedaMovimientos::class)->name('busqueda_movimientos');
 });
+
+
+// cambios de registro
+
+Route::prefix('registros')->middleware(['role:sistemas'])->group(function () {
+    Route::get('/alta_registros', CancelacionMovimientos::class)->name('alta_registros');
+});
+
