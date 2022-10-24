@@ -42,3 +42,33 @@
                 </div>
             </div>
 </div>
+@section('js')
+    <script>
+                function validaCaracterConGuionesDiagonal(evt) {
+                    var code = (evt.which) ? evt.which : evt.keyCode;
+            if (code == 8 || code == 45 || code == 47) { // backspace.
+                return true;
+            } else if ((code >= 48 && code <= 57) || (code >= 65 && code <= 90) || (code >= 97 && code <=
+                122)) { // is validate.
+                return true;
+            } else { // other keys.
+                return false;
+            }
+        }
+                function marcaselect(evt) {
+                    console.log(evt)
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+@endsection

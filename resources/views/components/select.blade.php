@@ -42,6 +42,7 @@
         @if ($wirechange) wire:change="{{ $wirechange }}" @endif
 
 
+
     >
 
       {{$slot}}
@@ -50,3 +51,7 @@
 
     @error($name) <span class="invalid-feedback">{{ $message }}</span> @enderror
 </div>
+@section('js')
+    <script>
+    </script>
+@endsection
