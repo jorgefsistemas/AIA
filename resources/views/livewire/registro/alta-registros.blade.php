@@ -37,8 +37,6 @@
                                             <x-select id="marca" required wire label="Marca" fill>
                                                 <x-option default></x-option>
                                                  @foreach ($marca['marca'] ?? [] as $value => $d)
-                                                    {{-- <x-option value="{{ $value('id') }}">{{
-                                                    $value.id}}</x-option> --}}
                                                     <x-option  value="{{ $d['id'] }}" >{{
                                                     $d['name']}}</x-option>
                                                 @endforeach
