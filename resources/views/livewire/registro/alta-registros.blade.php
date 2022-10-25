@@ -20,8 +20,6 @@
         @if (trim($alert) != '')
         <x-alert close>{{ $alert }}</x-alert>
         @endif
-        {{-- {{$marca['marca'][0] ? $marca['marca'][1]['name'] : []}} --}}
-                {{$marca ? $marca : 'sin marca'}}
 
         <div class="row">
           <div class="col-sm-12">
@@ -34,29 +32,43 @@
                 @if (session()->has('danger'))
                 <span class="error-message" style="color: red;"> {{ session('danger') }}</span>
                 @endif
-                {{-- <x-input id="marca" maxlength="7" size="7" name="marca" wiredefer required label="Marca"
-                                        revisacurpsinespacios copypaste minlength="7"></x-input> --}}
                 <div class="d-flex flex-row flex-wrap">
-                  <x-select id="marca" name="marca" required wire label="Marca" fill>
-                    <x-option default></x-option>
-                    @foreach ($marcas['marca'] ?? [] as $marca)
-                    <x-option value="{{ $marca['id'] }}">{{
-                                                    $marca['name']}}</x-option>
-
+                  <x-select name="marca" required wire='marca' label="Marca" fill>
+                    <x-option default  value=null></x-option>
+                    @foreach ($marcas['marca'] ?? [] as $marcasel)
+                    <x-option value="{{ $marcasel['id'] }}">{{
+                                                    $marcasel['name']}}</x-option>
                     @endforeach
+               
                   </x-select>
-
+                  {{-- @if(!is_null($marca)) --}}
                   <x-select id="modelo" required wire label="modelo" fill>
                     <x-option default></x-option>
-                    @foreach ($marcas['marca'] ?? [] as $value => $d)
+                    @foreach ($modelos['modelo'] ?? [] as $value => $d)
                     <x-option value="{{ $d['id'] }}">{{
                                                     $d['name']}}</x-option>
                     @endforeach
                   </x-select>
+                  {{-- @endif --}}
 
                 </div>
                 <button type="sumbit" class="btn btn-lg btn-success" wire:loading.delay.attr="disabled">Enviar</button>
               </div>
+              <div>
+    {{-- <select wire:model="selected">
+        @foreach($this->range() as $number)
+            <option value="{{ $number }}">
+                {{ $number }}
+            </option>
+        @endforeach
+    </select> --}}
+    
+    {{-- @if($this->selectionIsValid())
+        <strong>
+            Congrats! Your number is even and in the correct range!
+        </strong>
+    @endif --}}
+</div>
             </div>
           </div>
 

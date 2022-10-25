@@ -16,9 +16,4 @@ class ApiExternos
     {
         return self::post(self::baseUrl($url), $data);
     }
-
-
-
-
-
 }

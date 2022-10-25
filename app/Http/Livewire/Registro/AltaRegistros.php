@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Registro;
 use App\Models\Tramite;
+use App\Services\Consume\LocalApi;
 use App\Services\Valid;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -13,32 +14,45 @@ use Illuminate\Support\Facades\Http;
 class AltaRegistros extends Component
 {
     use WithFileUploads;
+    public $selectedInput='';
     public $placa;
     public $modelo;
     public $marca;
+    public $marcasel=null;
     public $oficio;
     public $oficio_confirmation;
     public $alert;
-    protected $listeners = ['snapPhoto', 'snapPhotoTaken','snapPhotoOperador'];
+    // protected $listeners = ['snapPhoto', 'snapPhotoTaken','snapPhotoOperador'];
     public $marcas= [];
+    public $modelos= [];
+    private  $logueado=null;
+
+    protected $listeners = ['SelectMarca' => 'SelectMarca'];
 
 
+    public function __construct()
+    {
+        
+    }
     public function mount()
     {
         //dd(auth()->user()->email, decrypt(auth()->user()->password));
-        $logueado = Http::asForm()->post('http://localhost:8000/api/login', [
-            'email' => auth()->user()->email,
-            'password' => 'admin',
-        ]);
 
-        
-        $marca = Http::withHeaders(['Access-Control-Allow-Credentials'=>'true'])->withToken($logueado->json('token'))->get('http://localhost:8000/api/marca');
-        $this->marcas=$marca->json($key = null);
-        //dd($this->marca['marca']);
-       
-       
+        $this->marcas = LocalApi::getMarcas();
+    }
+    public function range()
+    {
+        return range(1, 100);
+    }
+    
+    public function selectedIsValid()
+    {
+        return $this->selected > 0 && $this->selected < 50 && $this->selected % 2 === 0;
     }
 
+    public function updatedMarca(){
+        $this->modelos = LocalApi::getModelos($this->marca);
+    }
     // rules
     public function rules()
     {
@@ -57,18 +71,22 @@ class AltaRegistros extends Component
     public function render()
     {
             if(!empty($this->marca)) {
-                //dd($this->marca);
+               
 
-                $this->model = Modelo::where('marca_id', $this->marca)->get();
+               // $this->model = Modelo::where('marca_id', $this->marca)->get();
+            //    $modelos = Http::withHeaders(['Access-Control-Allow-Credentials'=>'true'])->withToken($this->logueado->json('token'))->get('http://localhost:8000/api/modelo');
+            //    $this->modelos=$modelos->json($key = null);
+               //dd($this->modelos);
             }
         // echo ($this);
         return view('livewire.registro.alta-registros', [
-            'marca' =>  $this->marcas
+            // 'marca123' =>  $this->marcas,
+            // 'modelo123'=> $this->modelos
             ])->extends('layouts.panel')->section('panel_content');
     }
     public function submit()
     {
-        echo $this->marca;
+      //  echo $this->marca;
         //  $this->validate();
         // try {
         //     DB::beginTransaction();
@@ -93,9 +111,11 @@ class AltaRegistros extends Component
         //     return false;
         // }
     }
-    public function updatedmarca()
+    public function SelectMarca()
     {
-        alert("gfd");
+        if(is_null($this->marca))dd($this->marcas);
+        
     }
+
         
 }

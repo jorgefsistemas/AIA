@@ -31,37 +31,18 @@
 <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
 <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
-<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+{{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'> --}}
 
 <script type="text/javascript">
-    $('.show_confirm').click(function(event) {
-        var id = event.target.id;
-        var form = $(this).closest("form");
-        var name = $(this).data("name");
-        event.preventDefault();
-        swal({
-                // title: `Seguro que desea eliminar este dictamen?`,
-                title: `Seguro que desea eliminar este ` + id + `?`,
-                text: "Favor de estar seguro de confirmar, los datos se perderan permanentemente.",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            })
-            .then((willDelete) => {
-                if (willDelete) {
-                    form.submit();
-                }
-            });
-    });
-    $('.show_confirm_permission').click(function(event) {
 
+    $('.show_confirm_permission').click(function(event) {
         var id = event.target.id;
         var form = $(this).closest("form");
         var name = $(this).data("name");
         console.log(id);
         event.preventDefault();
-        swal({
+        {{-- swal({
                 title: `Seguro que desea eliminar este ` + id + `?`,
                 text: "Favor de estar seguro de confirmar, los datos se perderan permanentemente.",
                 icon: "warning",
@@ -72,67 +53,18 @@
                 if (willDelete) {
                     form.submit();
                 }
-            });
+            }); --}}
     });
 
-    function valideKey(evt) {
 
-        // code is the decimal ASCII representation of the pressed key.
-        var code = (evt.which) ? evt.which : evt.keyCode;
 
-        if (code == 8) { // backspace.
-            return true;
-        } else if ((code >= 48 && code <= 57) ||
-            (code >= 65 && code <= 90) ||
-            (code >= 97 && code <= 122)
-            || code == 32
-
-        ) { // is validate.
-            return true;
-        } else { // other keys.
-            return false;
-        }
-    }
-    function valideKeyOnlyNum(evt) {
-
-        // code is the decimal ASCII representation of the pressed key.
-        var code = (evt.which) ? evt.which : evt.keyCode;
-
-        if (code == 8) { // backspace.
-            return true;
-                } else if ((code >= 48 && code <= 57)
-                ) { // is validate.
-                    return true;
-                } else { // other keys.
-                    return false;
-                }
-        }
-    function valideKeyUpper(evt) {
-
-// code is the decimal ASCII representation of the pressed key.
-var code = (evt.which) ? evt.which : evt.keyCode;
-
-if (code == 8) { // backspace.
-    return true;
-} else if ((code >= 48 && code <= 57) ||
-    (code >= 65 && code <= 90)|| code == 32
-) { // is validate.
-    return true;
-} else { // other keys.
-    return false;
-}
-}
+ 
 
     function valideKeyDictamen(evt) {
 
         // code is the decimal ASCII representation of the pressed key.
         var code = (evt.which) ? evt.which : evt.keyCode;
-        // if((code >= 97 && code <= 122)){
-        //     // alert()->success('Title','Lorem Lorem Lorem');
-        //     swal({
-        //         text: "Este campo solo adminte Mayúsculas, números, un guión y una diagonal",
-        //     })            ;
-        // }
+      
 
         if (code == 8) { // backspace.
             return true;

@@ -26,6 +26,7 @@
     'copypaste' => false,
     'revisasolonum' => false,
     'revisasoloemail' => false,
+    
 ])
 
 @php
@@ -86,6 +87,7 @@ if (str_contains($row, '-')) {
             @elseif ($wiredefer) wire:model.defer="{{ $wiredefer }}" @endif
         @if ($wirekeyup) wire:keyup="{{ $wirekeyup }}" @endif
         @if ($wirekeyupenter) wire:keyup.enter="{{ $wirekeyupenter }}" @endif
+
         @if ($wirechange) wire:change="{{ $wirechange }}" @endif type="{{ $type }}"
         placeholder="{{ $placeholder }}" value="{{ $slot }}">
 
@@ -180,5 +182,7 @@ if (str_contains($row, '-')) {
             e.target.value = e.target.value.replace(/[^A-Za-z0-9\@\.\s]+/g, '');
             return false;
         }
+
+
     </script>
 @endsection

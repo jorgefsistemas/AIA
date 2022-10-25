@@ -12,6 +12,8 @@
     'disabled' => false,
     'min' => false,
     'wirechange' => false,
+    'selmarca' =>false
+
 ])
 
 @php
@@ -40,6 +42,8 @@
         @if ($disabled) readonly @endif
         @if ($wire) wire:model="{{ $wire !== true ? $wire : $name }}" @endif
         @if ($wirechange) wire:change="{{ $wirechange }}" @endif
+        @if ($selmarca) onclick="marcaseleccionada(event)" @endif
+
 
 
 
@@ -53,5 +57,11 @@
 </div>
 @section('js')
     <script>
+            function marcaseleccionada(evt) {
+            var code = (evt.which)? evt.which : evt.keyCode;
+            console.log("has presionado: " + evt.target.value);
+           
+
+        }
     </script>
 @endsection
