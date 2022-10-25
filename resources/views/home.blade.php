@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title', 'SEMOVI')
+@section('title', '*')
 
 @section('content_header')
     <h1 style="font-size: 30pt"><b>Bienvenido</b></h1>
@@ -19,8 +19,8 @@
 
 @section('footer')
     <div class="d-flex justify-content-between">
-        <div class="" style="font-weight: bold;">Todo en Subastas</div>
-        <div class="">Todo en Subastas .2022 &copy;</div>
+        <div class="" style="font-weight: bold;">*</div>|
+        <div class="">* .2022 &copy;</div>
     </div>
 @stop
 

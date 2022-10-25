@@ -33,8 +33,8 @@
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-position: center bottom;
-            background-image: url("images/semovi/footer.png");
-            /* background-image: src="images/semovi/footer.png"; */
+            background-image: url("images/*/footer.png");
+            /* background-image: src="images/*/footer.png"; */
         }
         .footter{
             position: fixed;
@@ -113,7 +113,7 @@
 <body>
 <header>
     <div center="center" >
-        {{-- <img class="img_header" src="images/semovi/banner.png" alt=""> --}}
+        {{-- <img class="img_header" src="images/*/banner.png" alt=""> --}}
         <p class="subtitulo" >SABANA DE DATOS <b>CANCELACIONES</b></p>
     </div>
 
@@ -277,7 +277,7 @@
     <hr>
     <p class="leyenda"> Dirección de Sistemas de Información, Secretaría de Movilidad Ciudad de México 2021 &copy;</p>
 
-     {{-- <img src="images/semovi/footer.png" alt=""> --}}
+     {{-- <img src="images/*/footer.png" alt=""> --}}
      <p style="z-index: 7">"Con fundamento en el artículo 11 de la Ley de Protección de Datos Personales para el Distrito Federal,
         la información contenida en este documento no es oficial hasta que se confirme por escrito con
         la firma autógrafa del Servidor Público facultado, por lo que la información contenida en el mismo no es oficial de la

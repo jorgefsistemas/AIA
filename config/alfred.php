@@ -16,7 +16,7 @@ return [
         ],
         'apiExternos' => [
             'url' => '128.222.200.25:8091/apiExternos/api/',
-            'username' => 'semovi',
+            'username' => '*',
             'password' => 's3m0v1s1c0v3',
         ],
         'bajasAdmin' => [
@@ -25,7 +25,7 @@ return [
 
         'licenciaCurp' => [
             'url' => 'http://128.222.200.25:9015/apiSISCORP/api/',
-            'username' => 'semovi',
+            'username' => '*',
             'password' => 's3m0v1s1c0v3',
         ],
         'licenciaCandados' => [
@@ -41,13 +41,13 @@ return [
         ],
         'candadosLicencias' => [
             'url' => 'http://128.222.200.25:8097/apiCandados/api/',
-            'username' => 'semovi',
+            'username' => '*',
             'password' => 's3m0v1s1c0v3',
         ],
         
-        'apiSEMOVI' => [
-            'url' => 'http://128.222.200.25:8090/apiSEMOVI/api/',
-            'username' => 'semovi',
+        'api*' => [
+            'url' => 'http://128.222.200.25:8090/api*/api/',
+            'username' => '*',
             'password' => 's3m0v1s1c0v3',
         ]
 

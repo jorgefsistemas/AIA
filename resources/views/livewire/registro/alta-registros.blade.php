@@ -14,17 +14,20 @@
 
     <div class="card align-content-center">
       <div class="card-header" style="background-color: #721422">
-        <h4 class="text-white">Administrador de inventario de autos:</h4>
+        <h4 class="text-white">*:</h4>
       </div>
       <div class="card-body">
         @if (trim($alert) != '')
         <x-alert close>{{ $alert }}</x-alert>
         @endif
+        {{-- {{$marca['marca'][0] ? $marca['marca'][1]['name'] : []}} --}}
+                {{$marca ? $marca : 'sin marca'}}
+
         <div class="row">
           <div class="col-sm-12">
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title">Administrador de inventario de autos</h5>
+                <h5 class="card-title">*</h5>
                 <x-alert alert="info">Con esta opción se mostrará el registro de autos.</x-alert>
 
                 <p class="card-text">Con esta opción se mostrará el registro de autos.</p>
@@ -36,16 +39,16 @@
                 <div class="d-flex flex-row flex-wrap">
                   <x-select id="marca" name="marca" required wire label="Marca" fill>
                     <x-option default></x-option>
-                    @foreach ($marca['marca'] ?? [] as $value => $d)
-                    <x-option value="{{ $d['id'] }}">{{
-                                                    $d['name']}}</x-option>
+                    @foreach ($marcas['marca'] ?? [] as $marca)
+                    <x-option value="{{ $marca['id'] }}">{{
+                                                    $marca['name']}}</x-option>
 
                     @endforeach
                   </x-select>
 
                   <x-select id="modelo" required wire label="modelo" fill>
                     <x-option default></x-option>
-                    @foreach ($marca['marca'] ?? [] as $value => $d)
+                    @foreach ($marcas['marca'] ?? [] as $value => $d)
                     <x-option value="{{ $d['id'] }}">{{
                                                     $d['name']}}</x-option>
                     @endforeach

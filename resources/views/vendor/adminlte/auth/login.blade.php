@@ -84,7 +84,7 @@
 @stop
 
 @section('auth_footer')
-<div style="font-weight: bold">Todo en Subastas 2022 ©</div>
+<div style="font-weight: bold">* 2022 ©</div>
 
     {{-- Password reset link
     @if($password_reset_url)

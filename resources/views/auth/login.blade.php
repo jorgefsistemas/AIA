@@ -2,8 +2,8 @@
 @section('css')
     <style>
         body  {
-            /* background-image: url('images/vocho.jpg') !important; */
-            background-image: url('images/subastalo.png') !important;
+            background-image: url('images/vocho.jpg');
+            {{-- background-image: url('images/subastalo.png') !important; --}}
             background-repeat: no-repeat !important;
             background-size: cover !important;
             background-position: center !important;

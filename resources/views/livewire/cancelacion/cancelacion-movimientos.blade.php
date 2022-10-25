@@ -14,7 +14,7 @@
 
             <div class="card align-content-center">
                 <div class="card-header" style="background-color: #721422">
-                    <h4 class="text-white">Administrador de inventario de autos:</h4>
+                    <h4 class="text-white">*:</h4>
                 </div>
                 <div class="card-body">
                     @if (trim($alert) != '')
@@ -24,7 +24,7 @@
                         <div class="col-sm-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">Administrador de inventario de autos</h5>
+                                    <h5 class="card-title">*</h5>
                                     <x-alert alert="info">Con esta opción se mostrará el registro de autos.</x-alert>
 
                                     <p class="card-text">Con esta opción se mostrará el registro de autos.</p>

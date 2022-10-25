@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
     public function run()
     {
         $registro = [
-            ['admin', 'admin@todoensubastas.com.mx', bcrypt('todoensubastas')],
+            ['admin', 'admin@admin.com', bcrypt('admin')],
 
         ];
 

@@ -14,12 +14,13 @@ class AltaRegistros extends Component
 {
     use WithFileUploads;
     public $placa;
-    // public $marca;
+    public $modelo;
+    public $marca;
     public $oficio;
     public $oficio_confirmation;
     public $alert;
     protected $listeners = ['snapPhoto', 'snapPhotoTaken','snapPhotoOperador'];
-    public $marca= [];
+    public $marcas= [];
 
 
     public function mount()
@@ -27,10 +28,15 @@ class AltaRegistros extends Component
         //dd(auth()->user()->email, decrypt(auth()->user()->password));
         $logueado = Http::asForm()->post('http://localhost:8000/api/login', [
             'email' => auth()->user()->email,
-            'password' => 'todoensubastas',
+            'password' => 'admin',
         ]);
+
+        
         $marca = Http::withHeaders(['Access-Control-Allow-Credentials'=>'true'])->withToken($logueado->json('token'))->get('http://localhost:8000/api/marca');
-        $this->marca=$marca->json($key = null);
+        $this->marcas=$marca->json($key = null);
+        //dd($this->marca['marca']);
+       
+       
     }
 
     // rules
@@ -50,8 +56,14 @@ class AltaRegistros extends Component
     // menssages
     public function render()
     {
+            if(!empty($this->marca)) {
+                //dd($this->marca);
+
+                $this->model = Modelo::where('marca_id', $this->marca)->get();
+            }
+        // echo ($this);
         return view('livewire.registro.alta-registros', [
-            'marca' =>  $this->marca
+            'marca' =>  $this->marcas
             ])->extends('layouts.panel')->section('panel_content');
     }
     public function submit()
@@ -81,4 +93,9 @@ class AltaRegistros extends Component
         //     return false;
         // }
     }
+    public function updatedmarca()
+    {
+        alert("gfd");
+    }
+        
 }

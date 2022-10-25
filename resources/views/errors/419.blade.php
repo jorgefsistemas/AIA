@@ -8,7 +8,7 @@
         <div class="col-md-8">
             <div class="container">
                 <h1 class="text-green text-center">
-                    <strong>Todo en Subastas</strong>
+                    <strong>*</strong>
                 </h1>
             </div>
         </div>

@@ -54,7 +54,7 @@
             <div class="d-flex flex-wrap bd-highlight justify-content-between mb-3">
                 <div class="p-2 bd-highlight">
                     <a href="https://www.cdmx.gob.mx/" class="text-white" target="_blank"><span></span></a>
-                    <a href="https://www.semovi.cdmx.gob.mx/" class="text-white" target="_blank"><span>SEMOVI</span> | <span>CANCELACION EXPEDIENTE</span></a>
+                    <a href="https://www.*.cdmx.gob.mx/" class="text-white" target="_blank"><span>*</span> | <span>CANCELACION EXPEDIENTE</span></a>
                 </div>
                 <div class="p-2 bd-highlight text-white"><span></span></div>
                 <div class="p-2 bd-highlight text-white">
