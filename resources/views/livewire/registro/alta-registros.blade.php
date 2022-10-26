@@ -8,7 +8,7 @@
     <div class="spinner-border ml-2" role="status">
       <span class="sr-only">CARGANDO...</span>
     </div>
-  </div>
+  </div> {{$precio}}
 
   <form wire:submit.prevent='submit' method="POST">
 
@@ -20,7 +20,7 @@
         @if (trim($alert) != '')
         <x-alert close>{{ $alert }}</x-alert>
         @endif
-
+     
         <div class="row">
           <div class="col-sm-12">
             <div class="card">
@@ -36,21 +36,26 @@
                   <x-select name="marca" required wire='marca' label="Marca" fill>
                     <x-option default  value=null></x-option>
                     @foreach ($marcas['marca'] ?? [] as $marcasel)
-                    <x-option value="{{ $marcasel['id'] }}">{{
-                                                    $marcasel['name']}}</x-option>
+                    <x-option value="{{ $marcasel['id'] }}">{{$marcasel['name']}}</x-option>
                     @endforeach
-               
                   </x-select>
-                  {{-- @if(!is_null($marca)) --}}
-                  <x-select id="modelo" required wire label="modelo" fill>
+                 
+                  <x-select id="modelo" name="modelo" required wire label="modelo" fill>
                     <x-option default></x-option>
                     @foreach ($modelos['modelo'] ?? [] as $value => $d)
-                    <x-option value="{{ $d['id'] }}">{{
-                                                    $d['name']}}</x-option>
+                    <x-option value="{{ $d['id'] }}">{{ $d['name']}}</x-option>
                     @endforeach
                   </x-select>
-                  {{-- @endif --}}
-
+                  @php $last= date('Y')-70; @endphp
+                  
+                  <x-select id="year" name="year" wire label="año">
+                      {{ $last= date('Y')-120 }}
+                      {{ $now = date('Y') }}
+                      @for ($i = $now; $i >= $last; $i--)
+                          <x-option value="{{ $i }}">{{ $i }}</x-option>
+                      @endfor
+                  </x-select>
+                  <x-input id="precio" maxlength="10" size="10" name="precio" required label="precio" wire revisasolonum  copypaste minlength="10"></x-input>
                 </div>
                 <button type="sumbit" class="btn btn-lg btn-success" wire:loading.delay.attr="disabled">Enviar</button>
               </div>

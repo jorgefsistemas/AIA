@@ -19,6 +19,8 @@ class AltaRegistros extends Component
     public $modelo;
     public $marca;
     public $marcasel=null;
+    public $year=null;
+    public $precio;
     public $oficio;
     public $oficio_confirmation;
     public $alert;
@@ -58,12 +60,14 @@ class AltaRegistros extends Component
     {
         return [
             'marca' => 'required',
+            'modelo' => 'required',
         ];
     }
     public function messages()
     {
         return [
-            'marca.required' => 'Favor de verificar la placa.',
+            'marca.required' => 'Favor de verificar la marca.',
+            'modelo.required' => 'Favor de verificar la modelo.',
 
         ];
     }

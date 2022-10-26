@@ -80,8 +80,8 @@ if (str_contains($row, '-')) {
         @if ($revisacurp) onkeypress ="return  validaCaracter(event);" onkeyup="validaCaracterMobile(event);" @endif
         @if ($revisacurpsinespacios) onkeypress ="return validaCaracterSinEspacios(event);" onkeyup="validaCaracterSinEspaciosMobile(event);" @endif
         @if ($revisacurpsinespaciosconguiones) onkeypress ="return validaCaracterConGuionesDiagonal(event);" @endif
-        @if ($revisasolonum) onkeypress ="return  soloNumeros(event);" onkeyup="soloNumerosMobile(event);" @endif
-        @if ($revisasoloemail) onkeypress ="return  soloEmail(event);" onkeyup="soloEmailMobile(event);" @endif
+        @if ($revisasolonum) onkeypress="return  soloNumeros(event);" onkeyup="soloNumerosMobile(event);"  @endif
+        @if ($revisasoloemail)  onkeyup="soloEmailMobile(event)" @endif
         @if ($copypaste) oncopy="return false" onpaste="return false" @endif
         @if ($wire) wire:model="{{ $wire }}"
             @elseif ($wiredefer) wire:model.defer="{{ $wiredefer }}" @endif
