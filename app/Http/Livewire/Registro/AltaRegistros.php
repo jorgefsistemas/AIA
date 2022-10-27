@@ -2,10 +2,13 @@
 
 namespace App\Http\Livewire\Registro;
 use App\Models\Tramite;
-use App\Services\Consume\LocalApi;
 use App\Services\Valid;
 use Livewire\Component;
+use App\Suports\Archivo;
+use Illuminate\Http\Request;
+use App\Models\Registro\Auto;
 use Livewire\WithFileUploads;
+use App\Services\Consume\LocalApi;
 use Illuminate\Support\Facades\DB;
 use App\Services\Consume\SicoveApi;
 use Illuminate\Support\Facades\Http;
@@ -14,15 +17,27 @@ use Illuminate\Support\Facades\Http;
 class AltaRegistros extends Component
 {
     use WithFileUploads;
-    public $selectedInput='';
-    public $placa;
-    public $modelo;
-    public $marca;
+
+    public $fotografia;
+    public $ruta;
+
+    public Auto  $auto;
+    // public $selectedInput='';
+    // public $placa;
+    // public $modelo;
+    // public $marca;
+    
+    // public $year=null;
+    // public $color;
+    // public $kilometraje;
+    // public $precio;
+    // public $email;
+    // public $tel;
+    // public $fotografia;
+    // public $oficio;
+    // public $falta;
+
     public $marcasel=null;
-    public $year=null;
-    public $precio;
-    public $oficio;
-    public $oficio_confirmation;
     public $alert;
     // protected $listeners = ['snapPhoto', 'snapPhotoTaken','snapPhotoOperador'];
     public $marcas= [];
@@ -36,8 +51,10 @@ class AltaRegistros extends Component
     {
         
     }
-    public function mount()
+    public function mount(Request $request)
     {
+        $this->auto = new Auto();
+        // dd( $request->all());
         //dd(auth()->user()->email, decrypt(auth()->user()->password));
 
         $this->marcas = LocalApi::getMarcas();
@@ -52,28 +69,44 @@ class AltaRegistros extends Component
         return $this->selected > 0 && $this->selected < 50 && $this->selected % 2 === 0;
     }
 
-    public function updatedMarca(){
-        $this->modelos = LocalApi::getModelos($this->marca);
+    public function updatedAutoMarca(){
+        $this->modelos = LocalApi::getModelos($this->auto['marca']);
     }
     // rules
     public function rules()
     {
         return [
-            'marca' => 'required',
-            'modelo' => 'required',
+            'auto.marca' => 'required',
+            'auto.modelo' => 'required',
+            'auto.anio' => 'required',
+            'auto.precio' => 'required',
+            'auto.kilometraje' => 'required',
+            'auto.color' => 'required',
+            'auto.email' => 'required',
+            'auto.telefono' => 'required',
+            // 'auto.fotografia' => 'required|file'
+
         ];
     }
     public function messages()
     {
         return [
-            'marca.required' => 'Favor de verificar la marca.',
-            'modelo.required' => 'Favor de verificar la modelo.',
+            'auto.marca.required' => 'Favor de verificar la marca.',
+            'auto.modelo.required' => 'Favor de verificar la modelo.',
+            'auto.anio.required' => 'Favor de verificar el año.',
+            'auto.kilometraje.required' => 'Favor de verificar el kilometraje.',
+            'auto.color.required' => 'Favor de verificar el kilometraje.',
+            'auto.email.required' => 'Favor de verificar el kilometraje.',
+            'auto.fotografia.required' => 'Favor de verificar el fotografia.',
+            'auto.telefono.required' => 'Favor de verificar el telefono.'
+
 
         ];
     }
     // menssages
     public function render()
     {
+        
             if(!empty($this->marca)) {
                
 
@@ -90,9 +123,10 @@ class AltaRegistros extends Component
     }
     public function submit()
     {
-      //  echo $this->marca;
+        //dd($this);
+       
         //  $this->validate();
-        // try {
+         try {
         //     DB::beginTransaction();
         //     $datosplaca = SicoveApi::consultaPlaca($this->placa);
         //     $this->placa= strtoupper($this->placa);
@@ -109,16 +143,36 @@ class AltaRegistros extends Component
         //     DB::commit();
         //     session()->flash('success', 'La información se guardó correctamente');
         //     return redirect()->route('home');
-        // } catch (\Throwable $th) {
+        $this->validaAutos();
+
+        } catch (\Throwable $th) {
         //     DB::rollBack();
         //     session()->flash('danger', 'Ocurrió un error al guardar' . $th->getMessage());
         //     return false;
-        // }
+         }
     }
     public function SelectMarca()
     {
         if(is_null($this->marca))dd($this->marcas);
         
+    }
+    public function validaAutos()
+    { 
+            // $archivo = Archivo::guardarAmbos($documento, $key, $this->auto['marca']."-".$this->auto['modelo']."-".$this->auto['anio']."-".$this->auto['kilometraje']);
+            $archivo = Archivo::guardarAmbos($this->fotografia, 1, $this->auto['marca']."-".$this->auto['modelo']."-".$this->auto['anio']."-".$this->auto['kilometraje']);
+            
+            // dd($archivo->path);
+            if ($archivo) {
+                $this->ruta=$archivo->path;
+                $this->auto['fotografia']=$archivo;
+                // dd($this->auto);
+
+                // $this->auto['fotografia'][$key] = $archivo;
+                // $this->tramite->nuevoDocumento($key, $archivo->path);
+                $this->tramite->nuevoDocumento(1, $archivo->path);
+            }
+
+
     }
 
         

@@ -26,30 +26,30 @@
     'copypaste' => false,
     'revisasolonum' => false,
     'revisasoloemail' => false,
-    
+    'mascara' => false,
 ])
 
 @php
-if ($wire == 1) {
-    $wire = $name;
-    $wire = str_replace('[', '.', $wire);
-    $wire = str_replace(']', '', $wire);
-}
-
-if ($wiredefer == 1) {
-    $wiredefer = $name;
-    $wiredefer = str_replace('[', '.', $wiredefer);
-    $wiredefer = str_replace(']', '', $wiredefer);
-}
-
-if (str_contains($row, '-')) {
-    $cols = explode('-', $row);
-    $mincol = $cols[0];
-    $maxcol = $cols[1];
-} else {
-    $mincol = (int) $row < 1 ? 1 : (int) $row;
-    $maxcol = 12 - $mincol;
-}
+    if ($wire == 1) {
+        $wire = $name;
+        $wire = str_replace('[', '.', $wire);
+        $wire = str_replace(']', '', $wire);
+    }
+    
+    if ($wiredefer == 1) {
+        $wiredefer = $name;
+        $wiredefer = str_replace('[', '.', $wiredefer);
+        $wiredefer = str_replace(']', '', $wiredefer);
+    }
+    
+    if (str_contains($row, '-')) {
+        $cols = explode('-', $row);
+        $mincol = $cols[0];
+        $maxcol = $cols[1];
+    } else {
+        $mincol = (int) $row < 1 ? 1 : (int) $row;
+        $maxcol = 12 - $mincol;
+    }
 @endphp
 
 <div
@@ -80,16 +80,16 @@ if (str_contains($row, '-')) {
         @if ($revisacurp) onkeypress ="return  validaCaracter(event);" onkeyup="validaCaracterMobile(event);" @endif
         @if ($revisacurpsinespacios) onkeypress ="return validaCaracterSinEspacios(event);" onkeyup="validaCaracterSinEspaciosMobile(event);" @endif
         @if ($revisacurpsinespaciosconguiones) onkeypress ="return validaCaracterConGuionesDiagonal(event);" @endif
-        @if ($revisasolonum) onkeypress="return  soloNumeros(event);" onkeyup="soloNumerosMobile(event);"  @endif
-        @if ($revisasoloemail)  onkeyup="soloEmailMobile(event)" @endif
+        @if ($revisasolonum) onkeypress="return  soloNumeros(event);" onkeyup="soloNumerosMobile(event);" @endif
+        @if ($revisasoloemail)  onkeypress="return  soloEmail(event);"  onkeyup="soloEmailMobile(event)" @endif
         @if ($copypaste) oncopy="return false" onpaste="return false" @endif
         @if ($wire) wire:model="{{ $wire }}"
             @elseif ($wiredefer) wire:model.defer="{{ $wiredefer }}" @endif
         @if ($wirekeyup) wire:keyup="{{ $wirekeyup }}" @endif
         @if ($wirekeyupenter) wire:keyup.enter="{{ $wirekeyupenter }}" @endif
-
-        @if ($wirechange) wire:change="{{ $wirechange }}" @endif type="{{ $type }}"
-        placeholder="{{ $placeholder }}" value="{{ $slot }}">
+        @if ($wirechange) wire:change="{{ $wirechange }}" @endif
+        @if ($mascara) onkeypress=return cpf(even) @endif
+        type="{{ $type }}"placeholder="{{ $placeholder }}" value="{{ $slot }}">
 
     @isset($small)
         <small class="form-text text-muted">{{ $small }}</small>
@@ -101,88 +101,138 @@ if (str_contains($row, '-')) {
 
 </div>
 
-@section('js')
-    <script>
-                function validaCaracterConGuionesDiagonal(evt) {
-                    var code = (evt.which) ? evt.which : evt.keyCode;
-            if (code == 8 || code == 45 || code == 47) { // backspace.
-                return true;
-            } else if ((code >= 48 && code <= 57) || (code >= 65 && code <= 90) || (code >= 97 && code <=
+{{-- @section('js') --}}
+<script type="text/javascript">
+    function cpf(v) {
+        v = v.replace(/([^0-9\.]+)/g, '');
+        v = v.replace(/^[\.]/, '');
+        v = v.replace(/[\.][\.]/g, '');
+        v = v.replace(/\.(\d)(\d)(\d)/g, '.$1$2');
+        v = v.replace(/\.(\d{1,2})\./g, '.$1');
+        v = v.toString().split('').reverse().join('').replace(/(\d{3})/g, '$1,');
+        v = v.split('').reverse().join('').replace(/^[\,]/, '');
+        return v;
+    }
+
+    function validaCaracterConGuionesDiagonal(evt) {
+        var code = (evt.which) ? evt.which : evt.keyCode;
+        if (code == 8 || code == 45 || code == 47) { // backspace.
+            return true;
+        } else if ((code >= 48 && code <= 57) || (code >= 65 && code <= 90) || (code >= 97 && code <=
                 122)) { // is validate.
-                return true;
-            } else { // other keys.
-                return false;
-            }
+            return true;
+        } else { // other keys.
+            return false;
         }
-        function validaCaracter(evt) {
-            // code is the decimal ASCII representation of the pressed key.
-            var code = (evt.which) ? evt.which : evt.keyCode;
-            if (code == 8 || code == 32) { // backspace.
-                return true;
-            } else if ((code >= 48 && code <= 57) || (code >= 65 && code <= 90) || (code >= 97 && code <=
+    }
+
+    function validaCaracter(evt) {
+        // code is the decimal ASCII representation of the pressed key.
+        var code = (evt.which) ? evt.which : evt.keyCode;
+        if (code == 8 || code == 32) { // backspace.
+            return true;
+        } else if ((code >= 48 && code <= 57) || (code >= 65 && code <= 90) || (code >= 97 && code <=
                 122)) { // is validate.
-                return true;
-            } else { // other keys.
-                return false;
-            }
-        }
-
-        // para Moviles
-        // function numberMobile(e){ e.target.value = e.target.value.replace(/[^\d]/g,''); return false; }
-        function validaCaracterMobile(e) {
-            e.target.value = e.target.value.replace(/[^A-Za-z0-9\s]+/g, '');
+            return true;
+        } else { // other keys.
             return false;
         }
+    }
 
-        function validaCaracterSinEspacios(evt) {
-            var code = (evt.which) ? evt.which : evt.keyCode;
-            if (code == 8 || code == 13) { // backspace.
-                return true;
-            } else if ((code >= 48 && code <= 57) || (code >= 65 && code <= 90) || (code >= 97 && code <=
+    // para Moviles
+    // function numberMobile(e){ e.target.value = e.target.value.replace(/[^\d]/g,''); return false; }
+    function validaCaracterMobile(e) {
+        e.target.value = e.target.value.replace(/[^A-Za-z0-9\s]+/g, '');
+        return false;
+    }
+
+    function validaCaracterSinEspacios(evt) {
+        var code = (evt.which) ? evt.which : evt.keyCode;
+        if (code == 8 || code == 13) { // backspace.
+            return true;
+        } else if ((code >= 48 && code <= 57) || (code >= 65 && code <= 90) || (code >= 97 && code <=
                 122)) { // is validate.
-                return true;
-            } else { // other keys.
-                return false;
-            }
-        }
-        function validaCaracterSinEspaciosMobile(e) {
-            e.target.value = e.target.value.replace(/[^A-Za-z0-9]+/g, '');
+            return true;
+        } else { // other keys.
             return false;
         }
+    }
 
-        function soloNumeros(evt) {
-            var code = (evt.which) ? evt.which : evt.keyCode;
-            if (code == 8) { // backspace.
-                return true;
-            } else if ((code >= 48 && code <= 57)) { // is validate.
-                return true;
-            } else { // other keys.
-                return false;
-            }
-        }
-        // para movil
-        function soloNumerosMobile(e) {
-            e.target.value = e.target.value.replace(/[^\d]/g, '');
+    function validaCaracterSinEspaciosMobile(e) {
+        e.target.value = e.target.value.replace(/[^A-Za-z0-9]+/g, '');
+        return false;
+    }
+
+    function soloNumeros(evt) {
+        var code = (evt.which) ? evt.which : evt.keyCode;
+        if (code == 8) { // backspace.
+            return true;
+        } else if ((code >= 48 && code <= 57)) { // is validate.
+            return true;
+        } else { // other keys.
             return false;
         }
+    }
+    // para movil
+    function soloNumerosMobile(e) {
+        e.target.value = e.target.value.replace(/[^\d]/g, '');
+        return false;
+    }
 
-        function soloEmail(evt) {
-            var code = evt.which;
-            if (code == 8) { // backspace.
-                return true;
-            } else if ((code >=48 && code <=57) || (code >=65 && code <=90) || (code >=97 && code <=122) || (code ==64 || code ==95 || code ==45 || code ==46)) { // is validate.
-                return true;
-            } else { // other keys.
-                return false;
-            }
-        }
-        // function soloEmailMobile(e){ e.target.value = e.target.value.replace(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,''); return false; }
-        // function soloEmailMobile(e){ e.target.value = e.target.value.replace(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,''); return false; }
-        function soloEmailMobile(e) {
-            e.target.value = e.target.value.replace(/[^A-Za-z0-9\@\.\s]+/g, '');
+    function soloEmail(evt) {
+        var code = evt.which;
+        if (code == 8) { // backspace.
+            return true;
+        } else if ((code >= 48 && code <= 57) || (code >= 65 && code <= 90) || (code >= 97 && code <= 122) || (code ==
+                64 || code == 95 || code == 45 || code == 46)) { // is validate.
+            return true;
+        } else { // other keys.
             return false;
         }
+    }
+    // function soloEmailMobile(e){ e.target.value = e.target.value.replace(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,''); return false; }
+    // function soloEmailMobile(e){ e.target.value = e.target.value.replace(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,''); return false; }
+    function soloEmailMobile(e) {
+        e.target.value = e.target.value.replace(/[^A-Za-z0-9\@\.\s]+/g, '');
+        return false;
+    }
+
+    var currencyInput = document.querySelector('input[type="currency"]')
+    var currency = 'MXN' // https://www.currency-iso.org/dam/downloads/lists/list_one.xml
+
+    // format inital value
+    onBlur({
+        target: currencyInput
+    })
+
+    // bind event listeners
+    currencyInput.addEventListener('focus', onFocus)
+    currencyInput.addEventListener('blur', onBlur)
 
 
-    </script>
-@endsection
+    function localStringToNumber(s) {
+        return Number(String(s).replace(/[^0-9.-]+/g, ""))
+    }
+
+    function onFocus(e) {
+        var value = e.target.value;
+        e.target.value = value ? localStringToNumber(value) : ''
+    }
+
+    function onBlur(e) {
+        var value = e.target.value
+
+        var options = {
+            maximumFractionDigits: 2,
+            currency: currency,
+            style: "currency",
+            currencyDisplay: "symbol"
+        }
+
+        e.target.value = (value || value === 0) ?
+            localStringToNumber(value).toLocaleString('en-MX', options) :
+            ''
+    }
+</script>
+{{-- @stop --}}
+{{-- @endsection --}}

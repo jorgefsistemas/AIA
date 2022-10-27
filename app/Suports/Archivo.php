@@ -12,7 +12,7 @@ class Archivo
     public $path = '';
     public $name = '';
     public $extension = '';
-    public $sistema = 'tramites';
+    public $sistema = 'autos';
 
     public $prefix;
     public $sufix;
@@ -32,6 +32,7 @@ class Archivo
         if ($file instanceof TemporaryUploadedFile) {
             return self::guardar($file,$prefix, $sufix);
         }elseif(trim($file) != ''){
+            dd("No llega");
             return self::guardarFromInput($file,$prefix, $sufix);
         }
 
@@ -42,6 +43,7 @@ class Archivo
     {
         $archivo = new Archivo($file, $prefix, $sufix);
         $archivo->storeAs();
+        
         return $archivo;
     }
 
