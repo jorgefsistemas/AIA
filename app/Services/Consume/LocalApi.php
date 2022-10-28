@@ -29,4 +29,24 @@ class LocalApi
         ->get('http://localhost:8000/api/modelo/'.$marca)
         ->json();
     }
+
+    static function storeAutos($autos){
+        dd($autos);
+        return Http::withHeaders(['Access-Control-Allow-Credentials'=>'true'])
+        ->withToken(self::getToken())
+        ->post('http://localhost:8000/api/autos/', [
+            'marca' => $autos['marca'],
+            'modelo' =>  $autos['modelo'],
+            'anio' =>  $autos['anio'],
+            'precio' =>  $autos['precio'],
+            'kilometraje' =>  $autos['kilometraje'],
+            'color' =>  $autos['color'],
+            'email' =>  $autos['email'],
+            'telefono' =>  $autos['telefono']
+            ])
+        ->json();
+
+       
+
+    }
 }

@@ -169,7 +169,15 @@ class AltaRegistros extends Component
 
                 // $this->auto['fotografia'][$key] = $archivo;
                 // $this->tramite->nuevoDocumento($key, $archivo->path);
-                $this->tramite->nuevoDocumento(1, $archivo->path);
+                $auto = Archivo::guardarAmbos($this->fotografia, 1, $this->auto['marca']."-".$this->auto['modelo']."-".$this->auto['anio']."-".$this->auto['kilometraje']);
+
+                $autostore = LocalApi::storeAutos($this->auto);
+
+                dd($autostore);
+
+
+
+               // $this->tramite->nuevoDocumento(1, $archivo->path);
             }
 
 
