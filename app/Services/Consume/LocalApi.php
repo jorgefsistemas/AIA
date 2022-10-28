@@ -5,6 +5,8 @@ namespace App\Services\Consume;
 
 
 use Illuminate\Support\Facades\Http;
+use League\CommonMark\Extension\Attributes\Node\Attributes;
+use Livewire\TemporaryUploadedFile;
 
 class LocalApi
 {
@@ -17,8 +19,7 @@ class LocalApi
     }
 
     static function getMarcas(){
-        return Http::withHeaders(['Access-Control-Allow-Credentials'=>'true'])
-        ->withToken(self::getToken())
+        return Http::withToken(self::getToken())
         ->get('http://localhost:8000/api/marca')
         ->json($key = null);
     }
@@ -30,23 +31,20 @@ class LocalApi
         ->json();
     }
 
-    static function storeAutos($autos){
-        dd($autos);
-        return Http::withHeaders(['Access-Control-Allow-Credentials'=>'true'])
-        ->withToken(self::getToken())
-        ->post('http://localhost:8000/api/autos/', [
-            'marca' => $autos['marca'],
-            'modelo' =>  $autos['modelo'],
-            'anio' =>  $autos['anio'],
-            'precio' =>  $autos['precio'],
-            'kilometraje' =>  $autos['kilometraje'],
-            'color' =>  $autos['color'],
-            'email' =>  $autos['email'],
-            'telefono' =>  $autos['telefono']
-            ])
-        ->json();
-
-       
-
+    static function storeAutos($autos,TemporaryUploadedFile $fotografia){
+        try {
+           
+            $storeautos=Http::
+            attach('fotografia', file_get_contents($fotografia->getRealPath()), 'fotografia.jpg')
+            ->post('http://localhost:8000/api/autos');
+    
+            //->attach('fotografia',file_get_contents($fotografia->getRealPath()), 'fotografia.jpg')
+           
+             dd($storeautos);
+    
+           
+        } catch (\Throwable $th) {
+           dd( $th);
+        }
     }
 }

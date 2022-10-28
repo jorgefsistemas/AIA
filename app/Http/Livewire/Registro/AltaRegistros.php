@@ -159,26 +159,14 @@ class AltaRegistros extends Component
     public function validaAutos()
     { 
             // $archivo = Archivo::guardarAmbos($documento, $key, $this->auto['marca']."-".$this->auto['modelo']."-".$this->auto['anio']."-".$this->auto['kilometraje']);
-            $archivo = Archivo::guardarAmbos($this->fotografia, 1, $this->auto['marca']."-".$this->auto['modelo']."-".$this->auto['anio']."-".$this->auto['kilometraje']);
+            // $archivo = Archivo::guardarAmbos($this->fotografia, 1, $this->auto['marca']."-".$this->auto['modelo']."-".$this->auto['anio']."-".$this->auto['kilometraje']);
             
             // dd($archivo->path);
-            if ($archivo) {
-                $this->ruta=$archivo->path;
-                $this->auto['fotografia']=$archivo;
-                // dd($this->auto);
+            // $auto = Archivo::guardarAmbos($this->fotografia, 1, $this->auto['marca']."-".$this->auto['modelo']."-".$this->auto['anio']."-".$this->auto['kilometraje']);
 
-                // $this->auto['fotografia'][$key] = $archivo;
-                // $this->tramite->nuevoDocumento($key, $archivo->path);
-                $auto = Archivo::guardarAmbos($this->fotografia, 1, $this->auto['marca']."-".$this->auto['modelo']."-".$this->auto['anio']."-".$this->auto['kilometraje']);
+            $autostore = LocalApi::storeAutos($this->auto,$this->fotografia);
 
-                $autostore = LocalApi::storeAutos($this->auto);
-
-                dd($autostore);
-
-
-
-               // $this->tramite->nuevoDocumento(1, $archivo->path);
-            }
+            dd("NO validate");
 
 
     }

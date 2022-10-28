@@ -57,15 +57,15 @@
                                         @endfor
                                     </x-select>
                                     <x-input type="currency" id="auto.precio" maxlength="8" size="15" name="auto.precio"
-                                        required label="precio" wire revisasolonum  copypaste></x-input>
+                                        required label="precio" wire revisasolonum  copypaste>321</x-input>
                                     <x-input id="auto.kilometraje" maxlength="8" size="16" name="auto.kilometraje" required
-                                        label="kilometraje" wiredefer revisasolonum copypaste minlength="3"></x-input>
+                                        label="kilometraje" wiredefer revisasolonum copypaste minlength="3">321</x-input>
                                     <x-input id="auto.color" maxlength="30" size="16" name="auto.color" required
-                                        label="Color" wiredefer revisacurp copypaste minlength="3"></x-input>
+                                        label="Color" wiredefer revisacurp copypaste minlength="3">321</x-input>
                                     <x-input id="auto.email" maxlength="30" size="16" name="auto.email" required
-                                        label="correo" wiredefer revisasoloemail copypaste minlength="3"></x-input>
+                                        label="correo" wiredefer revisasoloemail copypaste minlength="3">j@gmail.com</x-input>
                                     <x-input id="auto.telefono" maxlength="10" size="10" name="auto.telefono" required
-                                        label="Telefono" wiredefer revisacurp copypaste minlength="3"></x-input>
+                                        label="Telefono" wiredefer revisacurp copypaste minlength="3">3216549871</x-input>
                                     {{-- <x-input-file class="fa fa-file-pdf text-red mr-2"
                                         id="auto.fotografia" label="Fotografia" name="auto.fotografia" wire
                                         accept="image/jpeg,image/gif,image/png,image/x-eps,image/*" revisapdfsize
