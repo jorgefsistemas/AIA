@@ -9,7 +9,6 @@
         "barryvdh/laravel-dompdf": "^2.0",
         "fruitcake/laravel-cors": "^3.0",
         "goldspecdigital/laravel-eloquent-uuid": "^8.0",
-        "guzzlehttp/guzzle": "^7.5",
         "intervention/image": "^2.7",
         "jeroennoten/laravel-adminlte": "^3.8",
         "laravel/framework": "^8.75",

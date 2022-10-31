@@ -33,14 +33,14 @@
                                     <span class="error-message" style="color: red;"> {{ session('danger') }}</span>
                                 @endif
                                 <div class="d-flex flex-row flex-wrap">
-                                    <x-select id="auto.marca" name="auto.marca" required wire label="Marca" fill>
+                                    <x-select id="auto.marca"  name="auto.marca" required wire label="Marca" fill>
                                         <x-option default value=null></x-option>
                                         @foreach ($marcas['marca'] ?? [] as $marcasel)
                                             <x-option value="{{ $marcasel['id'] }}">{{ $marcasel['name'] }}</x-option>
                                         @endforeach
                                     </x-select>
 
-                                    <x-select id="auto.modelo" name="auto.modelo" required wire label="modelo" fill>
+                                    <x-select id="auto.modelo"  name="auto.modelo" required wire label="modelo" fill>
                                         <x-option default ></x-option>
                                         @foreach ($modelos['modelo'] ?? [] as $value => $d)
                                             <x-option value="{{ $d['id'] }}">{{ $d['name'] }}</x-option>
@@ -48,7 +48,7 @@
                                     </x-select>
                                     @php $last= date('Y')-70; @endphp
 
-                                    <x-select id="auto.anio" name="auto.anio"  required label="año">
+                                    <x-select id="auto.anio" name="auto.anio" wire required label="año">
                                         {{ $last = date('Y') - 120 }}
                                         {{ $now = (date('Y')) }}
                                          <x-option default></x-option>
@@ -56,15 +56,15 @@
                                             <x-option value="{{ $i }}">{{ $i }}</x-option>
                                         @endfor
                                     </x-select>
-                                    <x-input type="currency" id="auto.precio" maxlength="8" size="15" name="auto.precio"
+                                    <x-input type="currency" id="auto.precio" wire maxlength="8" size="15" name="auto.precio"
                                         required label="precio"  revisasolonum  copypaste >321</x-input>
-                                    <x-input id="auto.kilometraje" maxlength="8" size="16" name="auto.kilometraje" required
+                                    <x-input id="auto.kilometraje" wire  maxlength="8" size="16" name="auto.kilometraje" required
                                         label="kilometraje"  revisasolonum copypaste minlength="3">321</x-input>
-                                    <x-input id="auto.color" maxlength="30" size="16" name="auto.color" required
+                                    <x-input id="auto.color" wire maxlength="30" size="16" name="auto.color" required
                                         label="Color"  revisacurp copypaste minlength="3">321</x-input>
-                                    <x-input id="auto.email" maxlength="30" size="16" name="auto.email" required
+                                    <x-input id="auto.email" wire maxlength="30" size="16" name="auto.email" required
                                         label="correo"  revisasoloemail copypaste minlength="3">j@gmail.com</x-input>
-                                    <x-input id="auto.telefono" maxlength="10" size="10" name="auto.telefono" required
+                                    <x-input id="auto.telefono" wire maxlength="10" size="10" name="auto.telefono" required
                                         label="Telefono"  revisacurp copypaste minlength="3">3216549871</x-input>
                                     {{-- <x-input-file class="fa fa-file-pdf text-red mr-2"
                                         id="auto.fotografia" label="Fotografia" name="auto.fotografia" wire
