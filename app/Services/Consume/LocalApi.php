@@ -7,6 +7,7 @@ namespace App\Services\Consume;
 use Illuminate\Support\Facades\Http;
 use League\CommonMark\Extension\Attributes\Node\Attributes;
 use Livewire\TemporaryUploadedFile;
+use Illuminate\Http\Response;
 
 class LocalApi
 {
@@ -30,8 +31,15 @@ class LocalApi
         ->get('http://localhost:8000/api/modelo/'.$marca)
         ->json();
     }
+    static function getAutos(){
+        return Http::withHeaders(['Access-Control-Allow-Credentials'=>'true'])
+        ->withToken(self::getToken())
+        ->get('http://localhost:8000/api/autos')
+        ->json();
+    }
 
     static function storeAutos($autos,TemporaryUploadedFile $fotografia){
+      
         try {
             $storeautos=Http::withHeaders([ 'Accept' => 'application/json'])
             ->withToken(self::getToken())
@@ -47,9 +55,9 @@ class LocalApi
                     'telefono' =>  $autos['telefono'],
                    ]);
 
-             dd($storeautos);
+             return $storeautos;
         } catch (\Throwable $th) {
-           dd( $th);
+            return $th;
         }
     }
 }

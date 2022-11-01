@@ -92,4 +92,54 @@
             </div>
         </div>
     </form>
+    {{-- inicio tabla --}}
+            <div class="row">
+            <div class="col-md-12 bg-white" style="padding: 15px;">
+                <table id="mostrar_registros" class="table table-responsive-lg table-striped" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th scope="col">marca</th>
+                            <th scope="col">modelo</th>
+                            <th scope="col">año</th> 
+                            <th scope="col">precio</th>
+                            <th scope="col">kilometraje</th>
+                            <th scope="col">color</th>
+                            <th scope="col">email</th>
+                            <th scope="col">telefono</th>
+                            <th scope="col">fotografia</th>
+                            <th scope="col">ruta</th>
+                            {{-- <th scope="col">alta</th>
+                            <th scope="col">modificado</th> --}}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($autos as $auto)
+                        {{-- @php $tramite->municipio=$tramite->ciudadano->domicilio['municipio'];@endphp --}}
+                            <tr>
+
+
+
+                                <td>{{ $auto->marca ?? '' }}</td>
+                                <td>{{ $auto->modelo ?? '' }}</td>
+                                <td>{{ $auto->anio ?? '' }}</td>
+                                <td>{{ $auto->precio ?? '' }}</td>
+                                <td>{{ $auto->kilometraje ?? '' }}</td>
+                                <td>{{ $auto->color ?? '' }}</td>
+                                <td>{{ $auto->email ?? '' }}</td>
+                                <td>{{ $auto->telefono ?? '' }}</td>
+                                <td>{{ $auto->forografia ?? '' }}</td>
+                                <td>{{ $auto->ruta ?? '' }}</td>
+                                {{-- <td>{{ $auto->created_at->format('d-m-Y') ?? '' }}</td>
+                                <td>{{ $auto->updated_at->format('d-m-Y') ?? '' }}</td> --}}
+                                
+                                    {{-- <a href="{{ route('pdf:constancia',encrypt($auto->id))}}" target='_blank' class="btn btn-success">Imprimir</a> --}}
+                                    {{-- <button wire:click='downloadOpen({{$tramite}})' type="button" class="btn btn-success">Imprimir</button> --}}
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {{-- fin tabla --}}
 </div>

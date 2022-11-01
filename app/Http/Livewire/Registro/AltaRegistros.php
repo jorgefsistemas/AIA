@@ -42,6 +42,7 @@ class AltaRegistros extends Component
     // protected $listeners = ['snapPhoto', 'snapPhotoTaken','snapPhotoOperador'];
     public $marcas= [];
     public $modelos= [];
+    public $autos= [];
     private  $logueado=null;
 
     protected $listeners = ['SelectMarca' => 'SelectMarca'];
@@ -58,6 +59,7 @@ class AltaRegistros extends Component
         //dd(auth()->user()->email, decrypt(auth()->user()->password));
 
         $this->marcas = LocalApi::getMarcas();
+        $this->autos = LocalApi::getAutos();
     }
     public function range()
     {
@@ -166,7 +168,7 @@ class AltaRegistros extends Component
 
             $autostore = LocalApi::storeAutos($this->auto,$this->fotografia);
 
-            dd("NO validate");
+            // dd("NO validate", $autostore);
 
 
     }
