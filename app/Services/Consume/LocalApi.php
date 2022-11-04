@@ -39,11 +39,10 @@ class LocalApi
     }
 
     static function storeAutos($autos,TemporaryUploadedFile $fotografia){
-      
         try {
             $storeautos=Http::withHeaders([ 'Accept' => 'application/json'])
             ->withToken(self::getToken())
-            ->attach('fotografia', file_get_contents($fotografia->getRealPath()), 'fotografia.jpg')
+            ->attach('fotografia', file_get_contents($fotografia->getRealPath()), $fotografia->getClientOriginalName() )
             ->post('http://localhost:8000/api/autos', [
                     'marca' => $autos['marca'],
                     'modelo' =>  $autos['modelo'],
@@ -54,10 +53,11 @@ class LocalApi
                     'email' =>  $autos['email'],
                     'telefono' =>  $autos['telefono'],
                    ]);
-
+                   //dd( $storeautos->json() );
              return $storeautos;
         } catch (\Throwable $th) {
-            return $th;
+             return $th;
+           //dd($th);
         }
     }
 }

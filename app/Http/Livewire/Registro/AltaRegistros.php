@@ -61,6 +61,8 @@ class AltaRegistros extends Component
 
         $this->marcas = LocalApi::getMarcas();
         //dd($this->autosdos);
+        $this->autos = LocalApi::getAutos();
+
 
         //dd($this->autos['auto']);
     }
@@ -120,7 +122,6 @@ class AltaRegistros extends Component
             //    $this->modelos=$modelos->json($key = null);
                //dd($this->modelos);
             }
-            $this->autos = LocalApi::getAutos();
 
         // echo ($this);
         return view('livewire.registro.alta-registros', [
@@ -132,7 +133,7 @@ class AltaRegistros extends Component
     public function submit()
     {
         //dd($this);
-       
+
         //  $this->validate();
          try {
         //     DB::beginTransaction();
@@ -152,11 +153,13 @@ class AltaRegistros extends Component
         //     session()->flash('success', 'La información se guardó correctamente');
         //     return redirect()->route('home');
         $this->validaAutos();
+        $this->autos = LocalApi::getAutos();
+
 
         } catch (\Throwable $th) {
-        //     DB::rollBack();
-        //     session()->flash('danger', 'Ocurrió un error al guardar' . $th->getMessage());
-        //     return false;
+            DB::rollBack();
+            session()->flash('danger', 'Ocurrió un error al guardar' . $th->getMessage());
+            return false;
          }
     }
     public function SelectMarca()
