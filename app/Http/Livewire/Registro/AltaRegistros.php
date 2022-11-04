@@ -42,7 +42,8 @@ class AltaRegistros extends Component
     // protected $listeners = ['snapPhoto', 'snapPhotoTaken','snapPhotoOperador'];
     public $marcas= [];
     public $modelos= [];
-    public $autos= [];
+    public $autos;
+    public $autosdos;
     private  $logueado=null;
 
     protected $listeners = ['SelectMarca' => 'SelectMarca'];
@@ -59,7 +60,9 @@ class AltaRegistros extends Component
         //dd(auth()->user()->email, decrypt(auth()->user()->password));
 
         $this->marcas = LocalApi::getMarcas();
-        $this->autos = LocalApi::getAutos();
+        //dd($this->autosdos);
+
+        //dd($this->autos['auto']);
     }
     public function range()
     {
@@ -117,10 +120,13 @@ class AltaRegistros extends Component
             //    $this->modelos=$modelos->json($key = null);
                //dd($this->modelos);
             }
+            $this->autos = LocalApi::getAutos();
+
         // echo ($this);
         return view('livewire.registro.alta-registros', [
             // 'marca123' =>  $this->marcas,
             // 'modelo123'=> $this->modelos
+            //  'autos'=> $this->autos['auto']
             ])->extends('layouts.panel')->section('panel_content');
     }
     public function submit()
