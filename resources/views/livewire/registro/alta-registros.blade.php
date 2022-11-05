@@ -1,4 +1,5 @@
 <div class="container">
+<link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <x-alert error close></x-alert>
     @if (session()->has('danger'))
         <x-alert close alert="danger">{{ session('danger') }}</x-alert>
@@ -112,7 +113,8 @@
                         <th scope="col">email</th>
                         <th scope="col">telefono</th>
                         <th scope="col">fotografia</th>
-                        <th  class="overflow-scroll" scope="col">ruta</th>
+                        <th scope="col">ruta</th>
+                        <th scope="col">acciones</th>
                         {{-- <th scope="col">alta</th>
                             <th scope="col">modificado</th> --}}
                     </tr>
@@ -123,7 +125,7 @@
 
 
 
-                            <td>{{ $auto['marca'] ?? '' }}</td>
+                            <td style="width: 1% !important;">{{ $auto['marca'] ?? '' }}</td>
                             <td>{{ $auto['modelo'] ?? '' }}</td>
                             <td>{{ $auto['anio'] ?? '' }}</td>
                             <td>{{ $auto['precio'] ?? '' }}</td>
@@ -132,7 +134,13 @@
                             <td>{{ $auto['email'] ?? '' }}</td>
                             <td>{{ $auto['telefono'] ?? '' }}</td>
                             <td>{{ $auto['fotografia'] ?? '' }}</td>
-                            <td class="overflow-hidden">{{ $auto['ruta'] ?? '' }}</td>
+                            <td class="overflow">{{ $auto['ruta'] ?? '' }}</td>
+                            <td style="width: 120px;" >
+                            
+                            <button wire:click='' type="button" class="btn btn-info btn-sm fa fa-edit">Edit</button>
+                            <button wire:click='' type="button" class="btn btn-danger btn-sm fa fa-remove"></button>
+                           
+                            </td>
                             {{-- <td>{{ $auto->created_at->format('d-m-Y') ?? '' }}</td>
                                 <td>{{ $auto->updated_at->format('d-m-Y') ?? '' }}</td> --}}
 
@@ -145,10 +153,4 @@
             </table>
         </div>
     </div>
-    {{-- fin tabla --}}
-    <div class="overflow-auto">This is an example of using .overflow-visible on an element with set width and height dimensionsThis is an example of using .overflow-visible on an element with set width and height dimensionsThis is an example of using .overflow-visible on an element with set width and height dimensions</div>
-<div class="overflow-hidden">This is an example of using .overflow-visible on an element with set width and height dimensionsThis is an example of using .overflow-visible on an element with set width and height dimensionsThis is an example of using .overflow-visible on an element with set width and height dimensions</div>
-<div class="overflow-visible">This is an example of using .overflow-visible on an element with set width and height dimensionsThis is an example of using .overflow-visible on an element with set width and height dimensionsThis is an example of using .overflow-visible on an element with set width and height dimensions</div>
-<div class="overflow-scroll">This is an example of using .overflow-visible on an element with set width and height dimensionsThis is an example of using .overflow-visible on an element with set width and height dimensionsThis is an example of using .overflow-visible on an element with set width and height dimensions</div>
-
 </div>

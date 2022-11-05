@@ -91,7 +91,7 @@ class AltaRegistros extends Component
             'auto.color' => 'required',
             'auto.email' => 'required',
             'auto.telefono' => 'required',
-            // 'auto.fotografia' => 'required|file'
+            'fotografia' => 'required|file'
 
         ];
     }
@@ -105,7 +105,8 @@ class AltaRegistros extends Component
             'auto.color.required' => 'Favor de verificar el kilometraje.',
             'auto.email.required' => 'Favor de verificar el kilometraje.',
             'auto.fotografia.required' => 'Favor de verificar el fotografia.',
-            'auto.telefono.required' => 'Favor de verificar el telefono.'
+            'auto.telefono.required' => 'Favor de verificar el telefono.',
+            'fotografia.required' => 'Favor de verificar la fotografia.'
 
 
         ];
