@@ -1,5 +1,5 @@
 <div class="container">
-<link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <x-alert error close></x-alert>
     @if (session()->has('danger'))
         <x-alert close alert="danger">{{ session('danger') }}</x-alert>
@@ -135,11 +135,13 @@
                             <td>{{ $auto['telefono'] ?? '' }}</td>
                             <td>{{ $auto['fotografia'] ?? '' }}</td>
                             <td class="overflow">{{ $auto['ruta'] ?? '' }}</td>
-                            <td style="width: 120px;" >
-                            
-                            <button wire:click='' type="button" class="btn btn-info btn-sm fa fa-edit">Edit</button>
-                            <button wire:click='' type="button" class="btn btn-danger btn-sm fa fa-remove"></button>
-                           
+                            <td style="width: 120px;">
+
+                                <button wire:click='' type="button" class="btn btn-info btn-sm fa fa-edit"
+                                    data-bs-toggle="modal" data-bs-target="#editModal">Edit</button>
+                                <button wire:click='' type="button"
+                                    class="btn btn-danger btn-sm fa fa-remove"></button>
+
                             </td>
                             {{-- <td>{{ $auto->created_at->format('d-m-Y') ?? '' }}</td>
                                 <td>{{ $auto->updated_at->format('d-m-Y') ?? '' }}</td> --}}
@@ -153,4 +155,6 @@
             </table>
         </div>
     </div>
+
+    
 </div>
