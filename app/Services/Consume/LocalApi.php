@@ -4,10 +4,11 @@
 namespace App\Services\Consume;
 
 
+// use Illuminate\Support\Facades\Http;
+use Illuminate\Http\Response;
+use Livewire\TemporaryUploadedFile;
 use Illuminate\Support\Facades\Http;
 use League\CommonMark\Extension\Attributes\Node\Attributes;
-use Livewire\TemporaryUploadedFile;
-use Illuminate\Http\Response;
 
 class LocalApi
 {
@@ -24,6 +25,7 @@ class LocalApi
         ->get('http://localhost:8000/api/marca')
         ->json($key = null);
     }
+    
 
     static function getModelos($marca){
         return Http::withHeaders(['Access-Control-Allow-Credentials'=>'true'])

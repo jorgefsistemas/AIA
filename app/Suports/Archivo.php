@@ -2,6 +2,7 @@
 
 namespace App\Suports;
 
+use Str;
 use ErrorException;
 use Illuminate\Http\File;
 use Illuminate\Http\UploadedFile;
@@ -53,7 +54,7 @@ class Archivo
 
         $fileData = base64_decode($img[1]);
         // save it to temporary dir first.
-        $tmpFilePath = sys_get_temp_dir() . '/' . \Str::uuid()->toString();
+        $tmpFilePath = sys_get_temp_dir() . '/' . Str::uuid()->toString();
         file_put_contents($tmpFilePath, $fileData);
 
         // this just to help us get file info.

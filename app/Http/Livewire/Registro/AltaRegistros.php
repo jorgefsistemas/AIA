@@ -20,6 +20,7 @@ class AltaRegistros extends Component
 
     public $fotografia;
     public $ruta;
+    public $open=false;
 
     public Auto  $auto;
     // public $selectedInput='';
@@ -51,7 +52,7 @@ class AltaRegistros extends Component
 
     public function __construct()
     {
-        
+      
     }
     public function mount(Request $request)
     {
@@ -60,8 +61,8 @@ class AltaRegistros extends Component
         //dd(auth()->user()->email, decrypt(auth()->user()->password));
 
         $this->marcas = LocalApi::getMarcas();
-        //dd($this->autosdos);
         $this->autos = LocalApi::getAutos();
+       
 
 
         //dd($this->autos['auto']);
@@ -165,7 +166,8 @@ class AltaRegistros extends Component
     }
     public function SelectMarca()
     {
-        if(is_null($this->marca))dd($this->marcas);
+        if(is_null($this->marca))
+        dd($this->marcas);
         
     }
     public function validaAutos()

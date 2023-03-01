@@ -14,6 +14,7 @@
     @yield('panel_content')
     {{-- @livewireScripts --}}
     @yield('scripts')
+      @livewire('livewire-ui-modal')
 @stop
 
 @section('footer')
@@ -33,6 +34,13 @@
 <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
 <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'> --}}
+
+ <!-- Styles -->
+        <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+        @livewireStyles
+        
+        <!-- Scripts -->
+        {{-- <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script> --}}
 
 <script type="text/javascript">
 

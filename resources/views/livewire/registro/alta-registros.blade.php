@@ -1,10 +1,16 @@
 <div class="container">
+
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script src="{{ asset('js/app.js') }}" defer></script>
+
+    {{-- <link href="{{ asset('js/app.js') }}" rel="stylesheet"> --}}
     <x-alert error close></x-alert>
     @if (session()->has('danger'))
         <x-alert close alert="danger">{{ session('danger') }}</x-alert>
     @endif
     <br>
+    <div>
+    </div>
 
 
     <form wire:submit.prevent='submit' method="POST">
@@ -25,7 +31,7 @@
                                 <h5 class="card-title">*</h5>
                                 <x-alert alert="info">Con esta opción se mostrará el registro de autos.</x-alert>
 
-                                <p class="card-text">Con esta opción se mostrará el registro de autos.</p>
+                                <p class="card-text">Con esta opción se mostrará el registro de autoss.</p>
                                 @if (session()->has('danger'))
                                     <span class="error-message" style="color: red;"> {{ session('danger') }}</span>
                                 @endif
@@ -156,5 +162,31 @@
         </div>
     </div>
 
-    
+    <button wire:click="$emit('openModal', 'edit-user')">Edit User</button>
+
+
+    <x-dropdown>
+        <x-slot name="trigger">
+            <button>Show More...</button>
+        </x-slot>
+
+        <ul>
+            <li><button wire:click="archive">Archive</button></li>
+            <li><button wire:click="delete">Delete</button></li>
+        </ul>
+    </x-dropdown>
+
+     <div x-data="{ show: false }">
+        <button @click="show = !show">Show</button>
+        <h1 x-show="show">Alpine Js is working !</h1>
+    </div>
+    <hr>
+
+    <div x-data>
+        <button @click="alert('Alpine Js is working !')">Click</button>
+    </div>
+
+    <div>
+    </div>
+</div>
 </div>

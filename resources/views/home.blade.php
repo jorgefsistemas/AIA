@@ -14,6 +14,10 @@
         </div>
     </div><br>
     <h3 class="text-center">Registro de Automoviles</h3>
+     <div x-data="{ show: false }">
+        <button @click="show = !show">Show</button>
+        <h1 x-show="show">Alpine Js is working !</h1>
+    </div>
 
 @stop
 
