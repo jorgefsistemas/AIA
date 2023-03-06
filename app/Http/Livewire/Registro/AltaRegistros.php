@@ -21,6 +21,7 @@ class AltaRegistros extends Component
     public $fotografia;
     public $ruta;
     public $open=false;
+    public $foo=null;
 
     public Auto  $auto;
     // public $selectedInput='';
@@ -78,7 +79,27 @@ class AltaRegistros extends Component
     }
 
     public function updatedAutoMarca(){
+       // dd($this->auto);
         $this->modelos = LocalApi::getModelos($this->auto['marca']);
+    }
+    public function hydrateauto(){
+        // dd("Hydrate");
+        // $this->modelos = LocalApi::getModelos($this->auto['marca']);
+    }
+    public function updatingAutoMarca(){
+       //  dd("updatingAutoMarca");
+       
+    }
+    // public function updatedautomarca(){
+    //     dd("updatedautomarca");
+       
+    // }
+    public function hydrateFoo($open)
+    {
+        // dd("hydrateFoo", $open);
+        $this->emit('toastr-success', "Loaded Employees.");
+    }
+    public function AutoMarcas(){ 
     }
     // rules
     public function rules()

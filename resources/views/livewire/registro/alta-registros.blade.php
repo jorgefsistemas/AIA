@@ -13,7 +13,7 @@
     </div>
 
 
-    <form wire:submit.prevent='submit' method="POST">
+    {{-- <form wire:submit.prevent='submit' method="POST">
 
         <div class="card align-content-center">
             <div class="card-header" style="background-color: #721422">
@@ -72,21 +72,8 @@
                                     <x-input id="auto.telefono" wiredefer maxlength="10" size="10"
                                         name="auto.telefono" required label="Telefono" revisacurp copypaste
                                         minlength="3">3216549871</x-input>
-                                    {{-- <x-input-file class="fa fa-file-pdf text-red mr-2"
-                                        id="auto.fotografia" label="Fotografia" name="auto.fotografia" wire
-                                        accept="image/jpeg,image/gif,image/png,image/x-eps,image/*" revisapdfsize
-                                        ></x-input-file> --}}
                                     <x-input-file wire class="fa fa-file-pdf text-red mr-2" id="fotografia"
                                         label="Fotografia" name="fotografia" revisapdfsize></x-input-file>
-                                    {{-- <x-input type="date" id="falta" maxlength="7" size="16" name="falta"
-                                        required label="Fecha de Alta" wiredefer revisacurp copypaste minlength="3">
-                                    </x-input>
-                                    <x-input type="date" id="fmodificacion" maxlength="7" size="16"
-                                        name="fmodificacion" required label="Fecha Modificacion" wiredefer revisacurp
-                                        copypaste minlength="3"></x-input>
-                                    <x-input type="date" id="feliminacion" maxlength="7" size="16"
-                                        name="feliminacion" required label="Fecha de eliminacion" wiredefer revisacurp
-                                        copypaste minlength="3"></x-input> --}}
                                 </div>
                                 <button type="sumbit" class="btn btn-lg btn-success"
                                     wire:loading.delay.attr="disable">Enviar</button>
@@ -98,7 +85,11 @@
                 </div>
             </div>
         </div>
-    </form>
+    </form> --}}
+    {{-- resources/views/livewire/registro/form.blade.php --}}
+                                    {{-- <x-alert alert="info">Con esta opción se mostrará el registro de autos.</x-alert> --}}
+
+    @include('livewire.registro.form')
     {{-- inicio tabla --}}
     <div class="card-body text-center" wire:loading>
         <div class="spinner-border ml-2" role="status">
@@ -107,20 +98,21 @@
     </div>
     <div class="row">
         <div class="col-md-12 bg-white" style="padding: 15px;">
-            <table id="mostrar_registros" class="table table-responsive-lg table-striped" style="width:100%">
+            <table id="mostrar_registros" class="table table-responsive-lg  table-striped" style="width:100%">
                 <thead>
                     <tr>
-                        <th scope="col">marca</th>
-                        <th scope="col">modelo</th>
-                        <th scope="col">año</th>
-                        <th scope="col">precio</th>
-                        <th scope="col">kilometraje</th>
-                        <th scope="col">color</th>
-                        <th scope="col">email</th>
-                        <th scope="col">telefono</th>
-                        <th scope="col">fotografia</th>
-                        <th scope="col">ruta</th>
-                        <th scope="col">acciones</th>
+                        <th  class="width:1" >#</th>
+                        <th >marca</th>
+                        <th >modelo</th>
+                        <th >año</th>
+                        <th >precio</th>
+                        <th >kilometraje</th>
+                        <th >color</th>
+                        <th >email</th>
+                        <th >telefono</th>
+                        <th >fotografia</th>
+                        <th  >ruta</th>
+                        <th >acciones</th>
                         {{-- <th scope="col">alta</th>
                             <th scope="col">modificado</th> --}}
                     </tr>
@@ -130,7 +122,7 @@
                         <tr>
 
 
-
+                            <td>{{ $loop->index+1}}</td>
                             <td style="width: 1% !important;">{{ $auto['marca'] ?? '' }}</td>
                             <td>{{ $auto['modelo'] ?? '' }}</td>
                             <td>{{ $auto['anio'] ?? '' }}</td>
@@ -140,13 +132,17 @@
                             <td>{{ $auto['email'] ?? '' }}</td>
                             <td>{{ $auto['telefono'] ?? '' }}</td>
                             <td>{{ $auto['fotografia'] ?? '' }}</td>
-                            <td class="overflow">{{ $auto['ruta'] ?? '' }}</td>
-                            <td style="width: 120px;">
+                            <td> {{ $auto['ruta'] ?? '' }}</td>
+                            <td  >
+                            <div   style="display:inline-block; min-width: max-content">
+                                <a class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModalCenter">Edit</a>
 
-                                <button wire:click='' type="button" class="btn btn-info btn-sm fa fa-edit"
-                                    data-bs-toggle="modal" data-bs-target="#editModal">Edit</button>
-                                <button wire:click='' type="button"
-                                    class="btn btn-danger btn-sm fa fa-remove"></button>
+                                {{-- <button  type="button" class="btn btn-outline-primary btn-sm fa fa-edit"
+                                    data-bs-toggle="modal" data-bs-target="#editModal">Edit</button> --}}
+                                {{-- <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modal-lg">modal-lg</button> --}}
+                                <button type="button" class="btn btn-danger btn-sm fa fa-remove"></button>
+                            </div>
 
                             </td>
                             {{-- <td>{{ $auto->created_at->format('d-m-Y') ?? '' }}</td>
@@ -160,33 +156,73 @@
                 </tbody>
             </table>
         </div>
+
     </div>
+        <table>
+            <tbody>
+                <tr>
+                    <th>País</th>
+                    <th>Capital</th>
+                    <th>Superficie</th>
+                    <th>Habitantes</th>
+                </tr>
+                <tr>
+                    <td>España</td>
+                    <td>Madrid</td>
+                    <td>504.645 km<sup>2</sup></td>
+                    <td>46,6 M</td>
+                </tr>
+            </tbody>
+        </table>
 
-    <button wire:click="$emit('openModal', 'edit-user')">Edit User</button>
 
+    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+        data-bs-target="#exampleModalCenter">
+        Inside modal scrollable
+    </button>
 
-    <x-dropdown>
-        <x-slot name="trigger">
-            <button>Show More...</button>
+    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modal2">
+        btn2
+    </button>
+
+    <x-modal id="exampleModalCenter" >
+    <x-slot name="body">
+          @include('livewire.registro.formedit')
+    </x-slot>
+    </x-modal>
+
+    <x-modal id="modal2">
+        <x-slot name="body">
+            hola desde modal 2
+
+            <button>foo</button>
         </x-slot>
-
-        <ul>
-            <li><button wire:click="archive">Archive</button></li>
-            <li><button wire:click="delete">Delete</button></li>
-        </ul>
-    </x-dropdown>
-
-     <div x-data="{ show: false }">
-        <button @click="show = !show">Show</button>
-        <h1 x-show="show">Alpine Js is working !</h1>
-    </div>
-    <hr>
-
-    <div x-data>
-        <button @click="alert('Alpine Js is working !')">Click</button>
-    </div>
-
-    <div>
-    </div>
+    </x-modal>
 </div>
-</div>
+
+<style>
+
+        .headt td {
+        min-width: 500px;
+        height: 1000px;
+        background-color: red;
+        }
+
+        table {
+        color: green;
+        }
+        table td:first-child {
+            width: 200px;
+            }
+            table td:nth-child(2) {
+            width: 100px;
+            }
+            table td:nth-child(3) {
+            width: 600px;
+            }
+            table td:last-child {
+            width: 150px;
+             
+            }
+</style>
+

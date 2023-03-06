@@ -21,6 +21,7 @@
         "sass-loader": "^11.1.1"
     },
     "dependencies": {
+        "@shufo/prettier-plugin-blade": "^1.8.10",
         "alpinejs": "^3.10.5",
         "autoprefixer": "10.4.5",
         "font-awesome": "^4.7.0",
