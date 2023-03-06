@@ -58,7 +58,7 @@ Route::prefix('cancelacion')->middleware(['role:sistemas'])->group(function () {
 });
 
 
-// cambios de registro
+// cambios de registro dos
 
 Route::prefix('registros')->middleware(['role:sistemas'])->group(function () {
     Route::get('/alta_registros', AltaRegistros::class)->name('alta_registros');
